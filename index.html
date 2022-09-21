@@ -3,34 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <link rel="stylesheet" href="/style.css">   
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    
     <title>Weather Dashboard</title>
 </head>
 <body>
  <div>
-    <h1 class="jumbotron text-center" class="page-header">Weather Dashboard</h1>
+    <h1 class=" text-center bg-info text-white">Weather Dashboard</h1>
 </div>
-<section>
-<div class="row">
-    <div id="search-city" class="col-3">1111</div>
-    <div id="presentday-weather" class="col-9">2222</div>
-</div>
-<div class="row row-cols-2">
-    <div id="city-history"class="col-3">3333</div>
-    
-    <div id="fiveday-forecast">
-       <div class="col">
-        <label>5-Day Forecast</label>
-       </div>       
-       <div class="col">forecast display1</div>
-       <div class="col">forecast display2</div>
-       <div class="col">forecast display3</div>
-       <div class="col">forecast display4</div>
-       <div class="col">forecast display5</div>
+
+<section >
+
+<div class="row ml-2 pt-4">
+    <div class="col-3 pr-3 ">
+        <div class="row font-weight-bold blockquote">
+            <label>Search for a City:</label>
+        </div>
+        <div class="row">
+            <input id="city-search-input" placeholder="Search for City" class="rounded w-100"></input>
+        <button id="search-button" class="rounded btn btn-primary w-100 mt-3" >Search</button>
+        </div>
+        
+        
+        <div class="row mt-3 border-top">
+        <button id="history-01" class="rounded btn btn-secondary w-100 mt-3" >history</button>
+        <button id="history-02" class="rounded btn btn-secondary w-100 mt-3" >history</button>
+        <button id="history-03" class="rounded btn btn-secondary w-100 mt-3" >history</button>
+        <button id="history-04" class="rounded btn btn-secondary w-100 mt-3" >history</button>
+        <button id="history-05" class="rounded btn btn-secondary w-100 mt-3" >history</button>
+            
+                   
+        </div>
+        
+    </div>
    
+   
+   
+    <div class="col-9 pl-5 pb-2 pr-4">
+        <div class="row w-100 border">Current day weather info</div>
+        <div class="row blockquote pt-4 font-weight-bold">5-Day Forecast</div>
+        <div class="row ">
+            <div class="col forecast" >forcast display</div>
+            <div class="col forecast" >forcast display</div>
+            <div class="col forecast" >forcast display</div>
+            <div class="col forecast" >forcast display</div>
+            <div class="col forecast" >forcast display</div>
+        </div>
     </div>
 </div>
+
+
+
+
 
 
 

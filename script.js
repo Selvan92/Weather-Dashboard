@@ -8,8 +8,6 @@ var forecastDay4=$('#forecastday4')
 var forecastDay5=$('#forecastday5')
 
 
-
-
 apiKey='843fa40ad68a96668befb0da86d9b44b';
 function getWeatherApi(city){
 
@@ -36,12 +34,14 @@ function getWeatherApi(city){
       .then(function(result){
         return result.json();
     })
+
     .then(function(finalResult){
         console.log(finalResult);
         return finalResult;
-    });
-  }
   
+  });
+    
+  } 
   
   
   function showWeather(city){
@@ -50,44 +50,40 @@ function getWeatherApi(city){
       .then(function(finalResult){
   
 // show todays weather    
-        var dateel = $('<p>');
-        dateel.text(output);
+        var imageicon =$('<img>');
+        imageicon.text("http://openweathermap.org/img/wn/=${10d}.png");
 
+       console.log(imageicon);
         var cityel = $('<p>');
-        cityel.text(finalResult.timezone);       
-
-        var templable= $('<lab>');
-        templable.text("Temperature:");
+        cityel.text(finalResult.timezone +"  ("+output+")");    
+        
         var tempel = $('<p>');
-        tempel.text(finalResult.current.temp + " °F");
-
-        var humiditylable= $('<lab>');
-        humiditylable.text("Humidity:");
+        tempel.text("Temperature:  "+finalResult.current.temp + " °F");
+    
         var humidityel = $('<p>');
-        humidityel.text(finalResult.current.humidity+ " %");
-
-        var windlable= $('<lab>');
-        windlable.text("Wind:");
+        humidityel.text("Humidity:  "+finalResult.current.humidity+ " %");
+        
         var windel = $('<p>');
-        windel.text(finalResult.current.wind_speed+ " MPH");
+        windel.text("Wind:  "+finalResult.current.wind_speed+ " MPH");
 
         var uvindexlable= $('<lab>');
         uvindexlable.text("UV Index:");
-        var uvindexel = $('<p>');
-       uvindexel.text(finalResult.current.uvi);
+        var uvindexel = $('<puv>');
+        uvindexel.text(finalResult.current.uvi);
 
 
   //append all the elements currentday     
-        currentDay.append(dateel,cityel,templable,tempel,humiditylable,humidityel,windlable,windel,uvindexlable,uvindexel);
+        currentDay.append(imageicon,cityel,tempel,humidityel,windel,uvindexlable,uvindexel);
 
 //style added to the currentday weather info
-       // $("p").css('background-color','white');
-       
+            
        $("p").addClass("col-12");
        $("lab").addClass("col-12");
-       
-    
-    
+       $("puv").addClass("col-1");
+       $("puv").css('background-color','green');
+       $("puv").css('color','white'); 
+       $("puv").css('text-align','center');   
+      
 // show forecast
 //day01
       var day1templable= $('<lable>');
@@ -143,7 +139,7 @@ day3windlable.text("Wind:");
 var day3windel = $('<p>');
 day3windel.text(finalResult.daily[2].wind_speed+ " MPH");  
 
-//append all the elements day2    
+//append all the elements day3   
 forecastDay3.append(day3templable,day3tempel,day3humiditylable,day3humidityel,day3windlable,day3windel);
 
 //day04
@@ -162,7 +158,7 @@ day4windlable.text("Wind:");
 var day4windel = $('<p>');
 day4windel.text(finalResult.daily[3].wind_speed+ " MPH");  
 
-//append all the elements day2    
+//append all the elements day4    
 forecastDay4.append(day4templable,day4tempel,day4humiditylable,day4humidityel,day4windlable,day4windel);
 
 //day05
@@ -181,7 +177,7 @@ day5windlable.text("Wind:");
 var day5windel = $('<p>');
 day5windel.text(finalResult.daily[4].wind_speed+ " MPH");  
 
-//append all the elements day2    
+//append all the elements day5   
 forecastDay5.append(day5templable,day5tempel,day5humiditylable,day5humidityel,day5windlable,day5windel);
 
 $("lable").addClass("row");
@@ -193,11 +189,69 @@ $("lable").addClass("row");
 searchButton.on("click",function(){
     var city =searchCity.val()
     showWeather(city);
+    forecast();
+    
 })
+
+//date
+var d = new Date();
+
+var month = d.getMonth()+1;
+var day = d.getDate();
+
+var output = d.getFullYear() + '/' +
+    ((''+month).length<2 ? '0' : '') + month + '/' +
+    ((''+day).length<2 ? '0' : '') + day;
+
+  
+ //forecast date 
+function forecast() { 
+     
+      var newdate1 = new Date(output);  
+      newdate1.setDate(newdate1.getDate() + 1);      
+      var dd = newdate1.getDate();
+      var mm = newdate1.getMonth() + 1;
+      var y = newdate1.getFullYear();  
+      var forecastDate1 = y + '/' + mm + '/' + dd;
+      forecastDay1.text(forecastDate1); 
+     
+      var newdate2 = new Date(forecastDate1);  
+      newdate2.setDate(newdate2.getDate() + 1);      
+      var dd = newdate2.getDate();
+      var mm = newdate2.getMonth() + 1;
+      var y = newdate2.getFullYear();  
+      var forecastDate2 = y + '/' + mm + '/' + dd;
+      forecastDay2.text(forecastDate2); 
+
+      var newdate3 = new Date(forecastDate2);  
+      newdate3.setDate(newdate3.getDate() + 1);      
+      var dd = newdate3.getDate();
+      var mm = newdate3.getMonth() + 1;
+      var y = newdate3.getFullYear();  
+      var forecastDate3 = y + '/' + mm + '/' + dd;
+      forecastDay3.text(forecastDate3); 
+
+      var newdate4 = new Date(forecastDate3);  
+      newdate4.setDate(newdate4.getDate() + 1);      
+      var dd = newdate4.getDate();
+      var mm = newdate4.getMonth() + 1;
+      var y = newdate4.getFullYear();  
+      var forecastDate4 = y + '/' + mm + '/' + dd;
+      forecastDay4.text(forecastDate4); 
+
+      var newdate5 = new Date(forecastDate4);  
+      newdate5.setDate(newdate5.getDate() + 1);      
+      var dd = newdate5.getDate();
+      var mm = newdate5.getMonth() + 1;
+      var y = newdate5.getFullYear();  
+      var forecastDate5 = y + '/' + mm + '/' + dd;
+      forecastDay5.text(forecastDate5); 
+}
+
 
 //store the input value in the initials
 
-searchButton.on('click',input);
+/*searchButton.on('click',input);
 
 function input () {
   localStorage.setItem('cityname',searchCity.value);
@@ -212,41 +266,6 @@ function nameDisplayCheck() {
     let name = localStorage.getItem('cityname');
     initialsScore.textContent=name + "'s score is " +timeRemaining;
   }
-}
+}*/
 
-//date
-var d = new Date();
-
-var month = d.getMonth()+1;
-var day = d.getDate();
-
-var output = d.getFullYear() + '/' +
-    ((''+month).length<2 ? '0' : '') + month + '/' +
-    ((''+day).length<2 ? '0' : '') + day;
-
-    $(document).ready(function () {
-      $('#txtDate').datepicker();
-      $('#follow_Date').datepicker();
-  });
- //forecast date 
-
-  function getdate() {
-      var tt =output;
-  
-      var date = new Date(tt);
-      var newdate = new Date(date);
-  
-      newdate.setDate(newdate.getDate() + 3);
-      
-      var dd = newdate.getDate();
-      var mm = newdate.getMonth() + 1;
-      var y = newdate.getFullYear();
-  
-      var someFormattedDate = mm + '/' + dd + '/' + y;
-      document.getElementById('follow_Date').value = someFormattedDate;
-    //symbol
-
-  }
-
-
- 
+ //symbol

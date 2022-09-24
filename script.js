@@ -6,10 +6,14 @@ var forecastDay2=$('#forecastday2')
 var forecastDay3=$('#forecastday3')
 var forecastDay4=$('#forecastday4')
 var forecastDay5=$('#forecastday5')
-
-
+var weatherImage=$('#weather-image')
+var history01=$('#history-01');
 apiKey='843fa40ad68a96668befb0da86d9b44b';
+
+
+
 function getWeatherApi(city){
+
 
     // call the current api to get the lon and lat
    return fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`)
@@ -48,12 +52,14 @@ function getWeatherApi(city){
   
     getWeatherApi(city)
       .then(function(finalResult){
-  
+      
 // show todays weather    
-        var imageicon =$('<img>');
-        imageicon.text("http://openweathermap.org/img/wn/=${10d}.png");
+       var imageUrl ="http://openweathermap.org/img/w/=${finalResult.current.weather[0].icon}@2x.png"
+     
+       
+        weatherImage.attr("src",imageUrl);
+        
 
-       console.log(imageicon);
         var cityel = $('<p>');
         cityel.text(finalResult.timezone +"  ("+output+")");    
         
@@ -73,7 +79,7 @@ function getWeatherApi(city){
 
 
   //append all the elements currentday     
-        currentDay.append(imageicon,cityel,tempel,humidityel,windel,uvindexlable,uvindexel);
+        currentDay.empty().append(cityel,tempel,humidityel,windel,uvindexlable,uvindexel);
 
 //style added to the currentday weather info
             
@@ -187,7 +193,8 @@ $("lable").addClass("row");
 }  
 
 searchButton.on("click",function(){
-    var city =searchCity.val()
+ 
+    var city =searchCity.val();
     showWeather(city);
     forecast();
     
@@ -249,23 +256,35 @@ function forecast() {
 }
 
 
-//store the input value in the initials
+//storage of search history
 
-/*searchButton.on('click',input);
+
+searchButton.on('click',input);
 
 function input () {
-  localStorage.setItem('cityname',searchCity.value);
+  //localStorage.setItem('cityname',JSON.stringify(searchCity.val()));
+  var storagelist=[];
+searchCity.val().push(storagelist);
+ localStorage.setItem('citiesArray',JSON.stringify(storagelist));
+ var storedArray=JSON.parse(localStorage.getItem('citiesArray'));
+  history01.text(storedArray);
 
-  nameDisplayCheck();
+
 
 }
 
 
-function nameDisplayCheck() {
+
+
+
+
+ //symbol
+ /*function nameDisplayCheck() {
   if (localStorage.getItem('cityname')) {
     let name = localStorage.getItem('cityname');
     initialsScore.textContent=name + "'s score is " +timeRemaining;
   }
 }*/
 
- //symbol
+
+  

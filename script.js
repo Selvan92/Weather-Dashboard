@@ -7,7 +7,17 @@ var forecastDay3=$('#forecastday3')
 var forecastDay4=$('#forecastday4')
 var forecastDay5=$('#forecastday5')
 var weatherImage=$('#weather-image')
+var imageDay01=$('#image-day01')
+var imageDay02=$('#image-day02')
+var imageDay03=$('#image-day03')
+var imageDay04=$('#image-day04')
+var imageDay05=$('#image-day05')
 var history01=$('#history-01');
+var history02=$('#history-02');
+var history03=$('#history-03');
+var history04=$('#history-04');
+var history05=$('#history-05');
+
 apiKey='843fa40ad68a96668befb0da86d9b44b';
 
 
@@ -53,15 +63,16 @@ function getWeatherApi(city){
     getWeatherApi(city)
       .then(function(finalResult){
       
-// show todays weather    
-       var imageUrl ="http://openweathermap.org/img/w/=${finalResult.current.weather[0].icon}@2x.png"
+// show todays weather   
+//var weatherImage = $('<img>'); 
+       var imageUrl =`http://openweathermap.org/img/wn/${finalResult.current.weather[0].icon}@2x.png`
      
        
         weatherImage.attr("src",imageUrl);
-        
+      
 
         var cityel = $('<p>');
-        cityel.text(finalResult.timezone +"  ("+output+")");    
+        cityel.text(finalResult.timezone +"  ("+output+") ");    
         
         var tempel = $('<p>');
         tempel.text("Temperature:  "+finalResult.current.temp + " °F");
@@ -92,6 +103,10 @@ function getWeatherApi(city){
       
 // show forecast
 //day01
+
+      var image01 =`http://openweathermap.org/img/wn/${finalResult.daily[0].weather[0].icon}@2x.png`
+      imageDay01.attr("src",image01);
+
       var day1templable= $('<lable>');
       day1templable.text("Temperature:");
       var day1tempel = $('<p>');
@@ -111,6 +126,9 @@ function getWeatherApi(city){
 forecastDay1.append(day1templable,day1tempel,day1humiditylable,day1humidityel,day1windlable,day1windel);
 
 //day02
+var image02 =`http://openweathermap.org/img/wn/${finalResult.daily[1].weather[0].icon}@2x.png`
+imageDay02.attr("src",image02);
+
 var day2templable= $('<lable>');
 day2templable.text("Temperature:");
 var day2tempel = $('<p>');
@@ -130,6 +148,10 @@ day2windel.text(finalResult.daily[1].wind_speed+ " MPH");
 forecastDay2.append(day2templable,day2tempel,day2humiditylable,day2humidityel,day2windlable,day2windel);
 
 //day03
+
+var image03 =`http://openweathermap.org/img/wn/${finalResult.daily[2].weather[0].icon}@2x.png`
+imageDay03.attr("src",image03);
+
 var day3templable= $('<lable>')
 day3templable.text("Temperature:");
 var day3tempel = $('<p>');
@@ -149,6 +171,9 @@ day3windel.text(finalResult.daily[2].wind_speed+ " MPH");
 forecastDay3.append(day3templable,day3tempel,day3humiditylable,day3humidityel,day3windlable,day3windel);
 
 //day04
+var image04 =`http://openweathermap.org/img/wn/${finalResult.daily[3].weather[0].icon}@2x.png`
+imageDay04.attr("src",image04);
+
 var day4templable= $('<lable>')
 day4templable.text("Temperature:");
 var day4tempel = $('<p>');
@@ -168,6 +193,9 @@ day4windel.text(finalResult.daily[3].wind_speed+ " MPH");
 forecastDay4.append(day4templable,day4tempel,day4humiditylable,day4humidityel,day4windlable,day4windel);
 
 //day05
+var image05 =`http://openweathermap.org/img/wn/${finalResult.daily[4].weather[0].icon}@2x.png`
+imageDay05.attr("src",image05);
+
 var day5templable= $('<lable>')
 day5templable.text("Temperature:");
 var day5tempel = $('<p>');
@@ -259,32 +287,37 @@ function forecast() {
 //storage of search history
 
 
-searchButton.on('click',input);
-
-function input () {
-  //localStorage.setItem('cityname',JSON.stringify(searchCity.val()));
-  var storagelist=[];
-searchCity.val().push(storagelist);
- localStorage.setItem('citiesArray',JSON.stringify(storagelist));
- var storedArray=JSON.parse(localStorage.getItem('citiesArray'));
-  history01.text(storedArray);
+searchButton.on('click',input)
+var cityArr;
+var data;
+var check=history01;
 
 
+
+function input(event) {
+event.preventDefault()
+
+  cityArr=JSON.parse(localStorage.getItem('cityhistory'));
+  cityArr.push(searchCity.val());
+
+  data=JSON.stringify(cityArr);
+  localStorage.setItem("cityhistory",data)
+  
+
+history01.text(cityArr[cityArr.length-1]);
+history02.text(cityArr[cityArr.length-2]);
+history03.text(cityArr[cityArr.length-3]);
+history04.text(cityArr[cityArr.length-4]);
+history05.text(cityArr[cityArr.length-5]);
 
 }
 
+window.onload=function() {
+  
+  
+}
 
 
-
-
-
- //symbol
- /*function nameDisplayCheck() {
-  if (localStorage.getItem('cityname')) {
-    let name = localStorage.getItem('cityname');
-    initialsScore.textContent=name + "'s score is " +timeRemaining;
-  }
-}*/
 
 
   

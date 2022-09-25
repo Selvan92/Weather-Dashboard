@@ -22,6 +22,7 @@ apiKey='843fa40ad68a96668befb0da86d9b44b';
 
 
 
+
 function getWeatherApi(city){
 
 
@@ -303,19 +304,28 @@ event.preventDefault()
   data=JSON.stringify(cityArr);
   localStorage.setItem("cityhistory",data)
   
-
 history01.text(cityArr[cityArr.length-1]);
 history02.text(cityArr[cityArr.length-2]);
 history03.text(cityArr[cityArr.length-3]);
 history04.text(cityArr[cityArr.length-4]);
 history05.text(cityArr[cityArr.length-5]);
 
+
+
+
 }
 
 window.onload=function() {
-  
-  
+  cityArr=JSON.parse(localStorage.getItem('cityhistory'));
+  history01.text(cityArr[cityArr.length-1]);
+  history02.text(cityArr[cityArr.length-2]);
+  history03.text(cityArr[cityArr.length-3]);
+  history04.text(cityArr[cityArr.length-4]);
+  history05.text(cityArr[cityArr.length-5]);
+
 }
+
+
 
 
 

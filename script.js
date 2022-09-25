@@ -298,7 +298,7 @@ var check=history01;
 function input(event) {
 event.preventDefault()
 
-  cityArr=JSON.parse(localStorage.getItem('cityhistory'));
+  cityArr=JSON.parse(localStorage.getItem('cityhistory'))||[];
   cityArr.push(searchCity.val());
 
   data=JSON.stringify(cityArr);
@@ -316,7 +316,7 @@ history05.text(cityArr[cityArr.length-5]);
 }
 
 window.onload=function() {
-  cityArr=JSON.parse(localStorage.getItem('cityhistory'));
+  cityArr=JSON.parse(localStorage.getItem('cityhistory'))||[];
   history01.text(cityArr[cityArr.length-1]);
   history02.text(cityArr[cityArr.length-2]);
   history03.text(cityArr[cityArr.length-3]);
